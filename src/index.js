@@ -1,17 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import reduxThunk from 'redux-thunk';
+import { loadState, saveState } from './localStorage';
+import throttle from 'lodash/throttle';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import App from './components/App';
+import reducers from './reducers';
+
+const persistedState = loadState();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  reducers,
+  persistedState,
+  composeEnhancers(applyMiddleware(reduxThunk)),
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+store.subscribe(throttle(() => {
+  const { expires_at } = store.getState().auth;
+  const isValidSession = (new Date().getTime() / 1000) < expires_at
+
+  if (isValidSession) {
+    saveState({
+      auth: store.getState().auth,
+    });
+  }
+}, 1000));
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector('#root')
+);
