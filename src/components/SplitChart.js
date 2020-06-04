@@ -38,8 +38,8 @@ class SplitChart extends React.Component {
             }
           },
           ticks: {
-            min: min.subtract(30,'s').format('m:s', { trim: false }),
-            max: max.add(30,'s').format('m:s')
+            min: min.subtract(30,'s').format('m:ss', { trim: false }),
+            max: max.add(30,'s').format('m:ss')
           }
         }]
       }
