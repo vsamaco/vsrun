@@ -20,6 +20,12 @@ https://react-leaflet.js.org/en/
 * mapbox/polyline - decoding polyline data
 https://github.com/mapbox/polyline
 
+* momentjs - format date and time
+https://momentjs.com/
+
+* create react app heroku buildpack
+https://github.com/mars/create-react-app-buildpack#user-content-continue-development
+
 ### Resources
 
 * Setup oAuth for react
@@ -30,6 +36,9 @@ https://egghead.io/lessons/javascript-redux-persisting-the-state-to-the-local-st
 
 * Plot time in chartjs
 https://stackoverflow.com/questions/48347482/plot-lap-times-with-chart-js-from-time-strings
+
+* Chartjs format time yaxis
+https://github.com/chartjs/Chart.js/issues/2791
 
 * Using chartjs in react
 https://medium.com/@vickdayaram/using-chart-js-with-react-324b7fac8ee6
