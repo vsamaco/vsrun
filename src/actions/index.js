@@ -1,6 +1,6 @@
 import strava from '../apis/strava';
 import history from '../history';
-import customData from '../stubs/activitiesData.json';
+// import customData from '../stubs/activitiesData.json';
 
 export const getAuthorizeUrl = () => {
   const api = new strava();
