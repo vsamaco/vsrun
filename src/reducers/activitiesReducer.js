@@ -7,6 +7,8 @@ export default (state = {}, action) => {
       return { ...state, ...newActivities };
     case 'FETCH_ACTIVITY':
       return { ...state, [action.payload.id]: action.payload };
+    case 'LOGOUT':
+      return {};
     default:
       return state;
   }

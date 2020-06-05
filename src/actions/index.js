@@ -1,5 +1,6 @@
 import strava from '../apis/strava';
 import history from '../history';
+import customData from '../stubs/activitiesData.json';
 
 export const getAuthorizeUrl = () => {
   const api = new strava();
@@ -34,8 +35,11 @@ export const logout = () => async (dispatch, getState) => {
   const { access_token } = getState().auth;
   const api = new strava({ access_token: access_token });
 
-  const response = await api.deauthorize();
-  console.log('deauth', response);
+  try {
+     await api.deauthorize();
+  } catch (error) {
+    console.log('deauth', error);
+  }
 
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');

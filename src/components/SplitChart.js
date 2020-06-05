@@ -17,29 +17,16 @@ class SplitChart extends React.Component {
       labels: this.props.labels || [],
       datasets: [{
         label: 'Split time',
-        data: this.props.dataset.map((x) => x.format('m:ss')) || [],
+        data: this.props.dataset || [],
       }],
     };
-
-    const sortData = this.props.dataset.sort((a,b) => a < b);
-    const max = sortData[0];
-    const min = sortData[sortData.length-1];
 
     const options = {
       scales: {
         yAxes: [{
-          type: 'time',
-          time: {
-            parser: 'm:ss',
-            unit: 'minutes',
-            displayFormats: {
-              'seconds': 'm:ss',
-              'minutes': 'm:ss'
-            }
-          },
           ticks: {
-            min: min.subtract(30,'s').format('m:ss', { trim: false }),
-            max: max.add(30,'s').format('m:ss')
+            callback: (x) => moment.duration(x,'s').format(':mm:ss'),
+            stepSize: 60,
           }
         }]
       }
@@ -50,7 +37,7 @@ class SplitChart extends React.Component {
   
     return (
       <div>
-        <Line ref={this.chartReference} data={data} options={options} height="300"/>
+        <Line ref={this.chartReference} data={data} options={options} height={300}/>
       </div>
     )
   }
