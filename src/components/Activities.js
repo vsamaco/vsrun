@@ -18,6 +18,10 @@ class Activities extends React.Component {
   }
 
   renderActivities() {
+    if (!this.props.activities) {
+      return;
+    }
+
     return (
       <div>
         <table className="ui celled striped table">

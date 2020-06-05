@@ -9,8 +9,8 @@ export const metersToFeet = (i) => {
 export const secondsToMinutes = (i) => {
   const hours = Math.floor(i / 3600);
   const minutes = Math.floor(i / 60);
-  const seconds = i % 60;
-  return `${minutes}:${seconds}`
+  const seconds = String(i % 60).padStart(2,0);
+  return `${hours}:${minutes}:${seconds}`
 }
 
 export const averagePace = (seconds, meters) => {
@@ -31,5 +31,5 @@ export const averagePace = (seconds, meters) => {
 export const averagePaceSeconds = (seconds, meters) => {
   const time = seconds / 60;
   const distance = metersToMiles(meters);
-  return time / distance;
+  return Math.round((time / distance) * 100) / 100;
 }

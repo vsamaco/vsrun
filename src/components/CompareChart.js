@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import momentDurationFormat from 'moment-duration-format';
-// import activitiesData from '../stubs/activitiesData';
 
 class CompareChart extends React.Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class CompareChart extends React.Component {
     const minData = sortData ? moment.duration(sortData[sortData.length - 1],'seconds') : 0;
     const maxData = sortData ? moment.duration(sortData[0],'s') : 0;
   
-    const dataset = this.props.activities.map((activity) => moment.duration(activity.moving_time,'s').format('mm:ss'));
+    const dataset = this.props.activities.map((activity) => activity.moving_time);//moment.duration(activity.moving_time,'s').format('mm:ss'));
 
     console.log('sortData', sortData)
     console.log('min,max', minData.format('m:s'), maxData.format('mm:ss', {trim: false}));
@@ -42,16 +41,9 @@ class CompareChart extends React.Component {
     const options = {
       scales: {
         yAxes: [{
-          type: 'time',
-          time: {
-            parser: 'mm:ss',
-            unit: 'minutes',
-            displayFormats: {
-              'seconds': 'mm:ss',
-              'minutes': 'mm:ss'
-            },
-            min: minData.subtract(3,'m').format('mm:ss', { trim: false }),
-            max: maxData.add(3,'m').format('mm:ss', { trim: false }),
+          ticks: {
+            callback: (x) => moment.duration(x,'s').format('H:mm:ss'),
+            stepSize: 300,
           }
         }]
       }

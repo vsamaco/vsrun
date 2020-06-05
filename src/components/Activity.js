@@ -45,8 +45,13 @@ class Activity extends React.Component {
     let data = [];
 
     this.props.activity.splits_standard.forEach((split) => {
-      labels.push(split.split);
-      data.push(moment.duration(split.moving_time, 'seconds'));
+      if (split.split === this.props.activity.splits_standard.length) {
+        labels.push(metersToMiles(split.distance));
+      } else {
+        labels.push(split.split);
+      }
+      //data.push(split.moving_time);
+      data.push(averagePaceSeconds(split.moving_time, split.distance))
     });
     console.log('data', data);
     return (
@@ -64,7 +69,7 @@ class Activity extends React.Component {
             {this.props.activity.splits_standard.map((split, index) => {
               return (
                 <tr key={index}>
-                  <td>{split.split}</td>
+                  <td>{labels[index]}</td>
                   <td>{averagePace(split.moving_time, split.distance)}</td>
                   <td>{metersToFeet(split.elevation_difference)}</td>
                 </tr>
