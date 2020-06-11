@@ -15,11 +15,11 @@ const App = () => {
         <Header />
         <div className="ui main text container">
           <Switch>
-            <Route exact path="/" render={(props) => <Home {...props} />} />
-            <Route exact path="/home" render={(props) => <Home {...props} />} />
-            <Route exact path="/activities/:id" render={(props) => <Activity {...props} />} />
-            <Route exact path="/segment_efforts/:id" render={(props) => <SegmentEfforts {...props} />} />
-            <Route exact path="/callback" render={(props) => <Callback {...props} />} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/activities/:id" component={Activity} />
+            <Route exact path="/segment_efforts/:id" component={SegmentEfforts} />
+            <Route exact path="/callback" component={Callback} />
           </Switch>
         </div>
       </div>

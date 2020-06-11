@@ -19,11 +19,10 @@ export const averagePace = (seconds, meters) => {
   // distance: 5.2m
   const time = seconds / 60;
   const distance = metersToMiles(meters);
-  const result = time / distance;
-  // console.log('result', moment.duration(Math.round(result * 100) / 100), 'seconds').format('h:mm:ss');
+  const paceSeconds = time / distance;
 
-  const res_min = Math.floor(Math.abs(result));
-  const res_sec = Math.floor((Math.abs(result) * 60) % 60);
+  const res_min = Math.floor(Math.abs(paceSeconds));
+  const res_sec = Math.floor((Math.abs(paceSeconds) * 60) % 60);
 
   return `${res_min}:${String(res_sec).padStart(2, 0)}`;
 }

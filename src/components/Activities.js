@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import momentDurationFormat from 'moment-duration-format';
 import { metersToMiles } from '../runUtil';
+
 import ActivityContext from '../contexts/ActivityContext';
 import CompareActivities from './CompareActivities'
 
@@ -12,7 +13,7 @@ class Activities extends React.Component {
   static contextType = ActivityContext;
 
   componentDidMount() {
-    if (this.props.auth.isSignedIn) {
+    if (this.props.isSignedIn) {
       this.props.fetchActivities();
     }
   }
@@ -80,7 +81,7 @@ class Activities extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth,
+    isSignedIn: state.auth.isSignedIn,
     activities: Object.values(state.activities).reverse()
   };
 }

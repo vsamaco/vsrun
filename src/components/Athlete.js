@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { fetchAthlete } from '../actions';
-// import athleteData from '../stubs/athleteData';
 
 class Athlete extends React.Component {
   componentDidMount() {
-    if (this.props.auth.isSignedIn) {
+    if (this.props.isSignedIn) {
       this.props.fetchAthlete();
     }
   }
@@ -24,7 +23,7 @@ class Athlete extends React.Component {
 
 const mapStateToProps = (state) => {
   return { 
-    auth: state.auth,
+    isSignedIn: state.auth.isSignedIn,
     athlete: state.athlete
   };
 }

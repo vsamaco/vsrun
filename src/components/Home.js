@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { ActivityStore } from '../contexts/ActivityContext';
 
 import Activities from './Activities';
@@ -17,8 +16,4 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { auth: state.auth }
-}
-
-export default connect(mapStateToProps, {})(Home);
+export default Home;

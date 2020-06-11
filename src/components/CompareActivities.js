@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import momentDurationFormat from 'moment-duration-format';
 import ActivityContext from '../contexts/ActivityContext';
-import { secondsToMinutes } from '../runUtil';
 
 import CompareChart from './CompareChart';
 import ActivityMap from './ActivityMap';

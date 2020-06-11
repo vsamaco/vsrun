@@ -9,10 +9,6 @@ class CompareChart extends React.Component {
     super(props);
   
     this.chartReference = React.createRef();
-    this.state = {
-      labels: [],
-      dataset: [],
-    };
   }
 
   render() {
@@ -58,13 +54,6 @@ class CompareChart extends React.Component {
       </div>
     )
   }
-}
-
-const mapStateToProps = state => {
-  return {
-    auth: state.auth,
-    activities: Object.values(state.activities)
-  };
 }
 
 export default connect(null)(CompareChart);

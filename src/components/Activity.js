@@ -2,16 +2,40 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchActivity } from '../actions';
 import { Link } from 'react-router-dom';
-import SplitChart from './SplitChart';
-//import customData from '../stubs/activityData';
 import moment from 'moment';
 import momentDurationFormat from 'moment-duration-format';
-import { metersToMiles, metersToFeet, secondsToMinutes, averagePace, averagePaceSeconds } from '../runUtil';
+import { metersToMiles, metersToFeet, averagePace, averagePaceSeconds } from '../runUtil';
+
 import ActivityMap from './ActivityMap';
+import SplitChart from './SplitChart';
 
 class Activity extends React.Component {
   componentDidMount() {
-    this.props.fetchActivity(this.props.match.params.id);
+    if (this.props.isSignedIn) {
+      this.props.fetchActivity(this.props.match.params.id);
+    }
+  }
+
+  renderActivity() {
+    return (
+      <dl>
+        <dt>Name</dt>
+        <dd>{this.props.activity.name}</dd>
+        <dt>Date</dt>
+        <dd>{moment(this.props.activity.start_date_local).format("MM/DD/YYYY HH:mm A")}</dd>
+        <dt>Time</dt>
+        <dd>{moment.duration(this.props.activity.moving_time, "seconds").format("HH:mm:ss")}</dd>
+        <dt>Distance</dt>
+        <dd>{metersToMiles(this.props.activity.distance)}</dd>
+        <dt>Pace</dt>
+        <dd>
+          {averagePace(this.props.activity.moving_time, this.props.activity.distance)}</dd>
+        <dt>Segment Efforts</dt>
+        <dd>{this.renderSegmentEfforts()}</dd>
+        <dt>Splits</dt>
+        <dd>{this.renderSplits()}</dd>
+      </dl>
+    );
   }
 
   renderSegmentEfforts() {
@@ -50,10 +74,11 @@ class Activity extends React.Component {
       } else {
         labels.push(split.split);
       }
-      //data.push(split.moving_time);
       data.push(averagePaceSeconds(split.moving_time, split.distance))
     });
+
     console.log('data', data);
+
     return (
       <div className="ui container grid">
         <div className="ui column six wide">
@@ -98,23 +123,7 @@ class Activity extends React.Component {
       <div className="ui container">
         <h1>Activity</h1>
         <div className="ui container">
-          <dl>
-            <dt>Name</dt>
-            <dd>{this.props.activity.name}</dd>
-            <dt>Date</dt>
-            <dd>{moment(this.props.activity.start_date_local).format("MM/DD/YYYY HH:mm A")}</dd>
-            <dt>Time</dt>
-            <dd>{moment.duration(this.props.activity.moving_time, "seconds").format("HH:mm:ss")}</dd>
-            <dt>Distance</dt>
-            <dd>{metersToMiles(this.props.activity.distance)}</dd>
-            <dt>Pace</dt>
-            <dd>
-              {averagePace(this.props.activity.moving_time, this.props.activity.distance)}</dd>
-            <dt>Segment Efforts</dt>
-            <dd>{this.renderSegmentEfforts()}</dd>
-            <dt>Splits</dt>
-            <dd>{this.renderSplits()}</dd>
-          </dl>
+          {this.renderActivity()}
         </div>
         <div className="ui container">
           <ActivityMap position={position} polyline={this.props.activity.map.polyline}/>
@@ -128,7 +137,7 @@ class Activity extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    auth: state.auth,
+    isSignedIn: state.auth.isSignedIn,
     activity: state.activities[ownProps.match.params.id],
   }
 };
