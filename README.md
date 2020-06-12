@@ -3,6 +3,9 @@
 ## Description
 React app for displaying and comparing Strava activities.
 
+## Demo
+[https://vsrun.herokuapp.com](https://vsrun.herokuapp.com)
+
 ## Requirements
 * Strava account
 * Node 10.13.10
