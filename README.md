@@ -1,15 +1,15 @@
 # vs.run
 
-### Description
+## Description
 React app for displaying and comparing Strava activities.
 
-### Requirements
+## Requirements
 * Strava account
 * Node 10.13.10
 * React 16.13.1
 * Redux 4.0.5
 
-### Setup
+## Setup
 1. Register app on Strava 
 
     [https://www.strava.com/settings/api]([https://www.strava.com/settings/api)
@@ -18,17 +18,24 @@ React app for displaying and comparing Strava activities.
 3. Get Strava client id and secret from application page
 4. Checkout project with git
 
-    `git clone https://github.com/vsamaco/vsrun.git`
+    ```
+    git clone https://github.com/vsamaco/vsrun.git
+    ```
+
 5. Install dependencies 
 
-    `yarn install` 
+    ```
+    yarn install
+    ```
 
-5. Copy `/src/.env.development.sample` to `/src/.env.development` and modify  `REACT_APP_STRAVA_CLIENT_ID` and `REACT_APP_STRAVA_CLIENT_SECRET` with your Strava client details.
+5. Copy `.env.development.sample` to `.env.development` and modify  `REACT_APP_STRAVA_CLIENT_ID` and `REACT_APP_STRAVA_CLIENT_SECRET` with your Strava client details.
 
-### How to use
+## How to use
 1. Start react app
 
-   `yarn start`
+   ```
+   yarn start
+   ```
 
 2. Browser tab should open to [http://localhost:3000](http://localhost:3000)
 3. Click button `Login with Strava` in header
@@ -37,7 +44,7 @@ React app for displaying and comparing Strava activities.
 6. Click Select button to compare activities
 7. Click activity title to preview details such as segment efforts, splits, map route.
 
-### Libraries
+## Libraries
 
 * react-chartjs-2 - chart 
    
@@ -59,7 +66,7 @@ React app for displaying and comparing Strava activities.
 
   [https://semantic-ui.com/](https://semantic-ui.com/)
 
-### Resources
+## Resources
 
 * [Setup oAuth for react](https://medium.appbase.io/how-to-implement-authentication-for-your-react-app-cf09eef3bb0b)
 
