@@ -16,15 +16,7 @@ class CompareChart extends React.Component {
     const labels = this.props.activities.map((activity) => {
       return moment(activity.start_date).format("MMMM DD");
     });
-  
-    const sortData = this.props.activities.map((activity) => activity.moving_time).sort();
-    const minData = sortData ? moment.duration(sortData[sortData.length - 1],'seconds') : 0;
-    const maxData = sortData ? moment.duration(sortData[0],'s') : 0;
-  
     const dataset = this.props.activities.map((activity) => activity.moving_time);//moment.duration(activity.moving_time,'s').format('mm:ss'));
-
-    console.log('sortData', sortData)
-    console.log('min,max', minData.format('m:s'), maxData.format('mm:ss', {trim: false}));
 
     const data = {
       labels: labels || [],

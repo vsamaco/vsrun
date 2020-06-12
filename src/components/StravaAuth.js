@@ -18,7 +18,7 @@ class StravaAuth extends React.Component {
           </React.Fragment>
         )}
         { !isAuthenticated && (
-          <a href={this.props.strava.getAuthorizeUrl()}>
+          <a href={this.props.getAuthorizeUrl()}>
             <div className="item">
               <button className="ui green button">
                 Login with Strava

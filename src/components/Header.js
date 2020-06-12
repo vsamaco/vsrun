@@ -1,15 +1,9 @@
 import React from 'react';
-import strava from '../apis/strava';
 import { Link } from 'react-router-dom';
 
 import StravaAuth from './StravaAuth';
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.strava = new strava();
-  }
   render() {
     return (
       <div className="ui large top fixed hidden menu">
@@ -21,7 +15,7 @@ class Header extends React.Component {
             Home
           </Link>
           <div className="right menu">
-            <StravaAuth strava={this.strava} />
+            <StravaAuth />
           </div>
         </div>
       </div>
